@@ -1,0 +1,30 @@
+<div style="background: url('../../assets/img/backImage.jpg') no-repeat center/cover; height: 100vh;">
+    <div class="container" style="justify-content: center; align-items: center; margin-top: 30vh;">
+      <div class="row">
+    <div class="col-md-5 mx-auto">
+    <div id="first">
+      <div class="myform form ">
+         <div class="logo mb-3">
+           <div class="col-md-12 text-center">
+            <h1>Login</h1>
+           </div>
+        </div>
+                 <form [formGroup]="loginForm" (ngSubmit)="logIn()" >
+                         <div class="form-group">
+                            <label >Telephone</label>
+                            <input type="number" formControlName="telephone"  class="form-control" aria-describedby="tellHelp" placeholder="Enter tel">
+                         </div>
+                         <div class="form-group">
+                            <label >Password</label>
+                            <input type="password" id="password" formControlName="password"  class="form-control" aria-describedby="password" placeholder="Enter Password">
+                         </div>
+
+                         <div class="col-md-12 text-center " style="display: block; margin-top: 10px;">
+                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                         </div>
+                    </form>
+
+      </div>
+    </div>
+  </div>
+
