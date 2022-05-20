@@ -1,65 +1,41 @@
 
-        <div class="container">
+       <div class="container">
           <div class="row">
             <div class="card" style="width: 100rem; ">
+
+              <div class="alert alert-success" *ngIf="success" >{{success}}</div>
+              <div class="alert alert-danger" *ngIf="error" >{{error}}</div>
+
               <div class="card-body">
                 <h5 class="card-title" style="text-align: center;">vendre un produit</h5>
 
-                <form [formGroup]="vendreProduitForm">
+                <form [formGroup]="vendreProduitForm" (ngSubmit)="vendre()">
 
-                  <div class="row" style="margin-top: 2%;">
-                    <legend class="col-form-label col-sm-3 pt-0">category</legend>
-                    <div class="col-9">
-                      <div class="row">
-
-                        <div class="col" *ngFor="let category of categories">
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="{{category._id}}"  checked >
-                            <label class="form-check-label" for="gridRadios1">
-                              {{category.name}}
-                            </label>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
+                  <div class="form-group"  >
+                    <label for="exampleFormControlSelect1">categories</label>
+                    <select class="form-control" formControlName="categoryId" [(ngModel)]="categorySelected" (click)="produitByCattegory()"  id="exampleFormControlSelect1">
+                      <option *ngFor="let category of categories"  value="{{category._id}}"> {{category.name}}</option>
+                    </select>
                   </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <select id="inputState" formControlName="productName" class="form-control">
-                        <option value=""> select produit</option>
-                        <option *ngFor="let produit of produits"  value="{{produit.name}}">{{produit.name}}</option>
-                      </select>
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" placeholder="quantité">
-                    </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Produit</label>
+                    <select class="form-control" formControlName="productName" id="exampleFormControlSelect1">
+                      <option *ngFor="let produit of produits" value="{{produit.name}}"> {{produit.name}}</option>
+                    </select>
                   </div>
 
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">quantite</label>
+                    <input type="number" formControlName="quantite" class="form-control" id="formGroupExampleInput" placeholder="quantite">
+                  </div>
 
-                  <div class="row" style="margin-top: 2%;">
-                    <legend class="col-form-label col-sm-3 pt-0">Type de ventes</legend>
-                    <div class="col-sm-10">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                          detail
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                          gros
-                        </label>
-                      </div>
-                      <!--<div class="form-check disabled">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                        <label class="form-check-label" for="gridRadios3">
-                          Third disabled radio
-                        </label>
-                      </div>-->
-                    </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">type de vente</label>
+                    <select class="form-control" formControlName="type" id="exampleFormControlSelect1">
+                      <option value="detail">detail</option>
+                      <option value="gros">gros</option>
+                    </select>
                   </div>
 
                   <div style="text-align: center; margin-top: 2%;">
@@ -110,29 +86,21 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">produit name</th>
+                    <th scope="col">quantite</th>
+                    <th scope="col">prix total</th>
+                    <th scope="col">vendu par</th>
+                    <th scope="col">vendu le</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                  <tr *ngFor="let ticket of tickets, let i = index" >
+                    <th scope="row">{{i}}</th>
+                    <td>{{ticket.productName}}</td>
+                    <td>{{ticket.quantite}}</td>
+                    <td>{{ticket.prixTotal}}</td>
+                    <td>{{ticket.userName}}</td>
+                    <td>{{ticket.createdAt | date}} </td>
                   </tr>
                 </tbody>
               </table>

@@ -29,4 +29,13 @@ export class ProduitService {
   addProduit(produit: any): Observable<any>{
     return this.http.post<any>(`${API_URL}/produits/add-produit`, produit, this.httpOptions)
   }
+
+  sellProduct(body: any): Observable<any>{
+    return this.http.post<any>(`${API_URL}/produits/sell-product`,body, this.httpOptions)
+  }
+
+  listeVentes(): Observable<any>{
+    return this.http.get(`${API_URL}/tickets/list-ventes`, this.httpOptions)
+  }
+
 }

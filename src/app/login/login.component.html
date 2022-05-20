@@ -9,6 +9,7 @@
             <h1>Login</h1>
            </div>
         </div>
+        <div *ngIf="error"  class="alert alert-danger">{{error}}</div>
                  <form [formGroup]="loginForm" (ngSubmit)="logIn()" >
                          <div class="form-group">
                             <label >Telephone</label>

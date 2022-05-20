@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup
+  error: any
 
   constructor(private fb: FormBuilder, private actRoute: ActivatedRoute, private route: Router,
     private authService: AuthService) { }
@@ -32,7 +33,11 @@ export class LoginComponent implements OnInit {
 
     })
     .catch((err)=>{
-      this.route.navigateByUrl('/login')
+      this.error = 'password or tel invalid'
+      setTimeout(() => {
+        this.error = ""
+      }, 5000);
+      // this.route.navigateByUrl('/login')
     })
 
 

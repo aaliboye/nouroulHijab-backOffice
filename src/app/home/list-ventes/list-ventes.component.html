@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="listVenteFormGroup" (ngSubmit)="getListVentesByName()" >
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="form-group"  >
+              <label for="exampleFormControlSelect1">categories</label>
+              <select class="form-control" formControlName="categoryId" [(ngModel)]="categorySelected" (click)="produitByCattegory()"  id="exampleFormControlSelect1">
+                <option *ngFor="let category of categories"  value="{{category._id}}"> {{category.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Category</label>
+              <select class="form-control" [(ngModel)]="produitSelected" formControlName="productName" id="exampleFormControlSelect1">
+                <option *ngFor="let produit of produits" value="{{produit.name}}"> {{produit.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col" style="margin-top: 25px;">
+            <button type="submit" class="btn btn-primary mb-2" > Search </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div style="margin-top: 6rem;">
+    <h1>liste des ventes</h1>
+  </div>
+
+  <div class="row" >
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">produit name</th>
+            <th scope="col">quantite</th>
+            <th scope="col">prix total</th>
+            <th scope="col">vendu par</th>
+            <th scope="col">vendu le</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let venete of ventes, let i = index" >
+            <th scope="row">{{i}}</th>
+            <td>{{venete.productName}}</td>
+            <td>{{venete.quantite}}</td>
+            <td>{{venete.prixTotal}}</td>
+            <td>{{venete.userName}}</td>
+            <td>{{venete.createdAt | date}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

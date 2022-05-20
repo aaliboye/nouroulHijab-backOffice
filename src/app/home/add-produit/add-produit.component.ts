@@ -12,6 +12,8 @@ export class AddProduitComponent implements OnInit {
   categories: any = []
 
   addFormProduit!: FormGroup
+  alert: any
+  image: any
 
   constructor(private produitService: ProduitService, private fb: FormBuilder) { }
 
@@ -23,7 +25,8 @@ export class AddProduitComponent implements OnInit {
       prixUnit: [''],
       prixGros: [''],
       stock: [''],
-      categoryName: ['']
+      categoryId: [''],
+      image: ['']
     })
   }
 
@@ -40,8 +43,20 @@ export class AddProduitComponent implements OnInit {
       return
     }
     else{
-      this.produitService.addProduit(this.addFormProduit.value).subscribe((res)=>{
+      let produit = {
+        name: this.addFormProduit.value.name,
+        description: this.addFormProduit.value.description,
+        prixUnit: this.addFormProduit.value.prixUnit,
+        prixGros: this.addFormProduit.value.prixGros,
+        stock: this.addFormProduit.value.stock,
+        categoryId: this.addFormProduit.value.categoryId,
+      }
+
+      localStorage.setItem(this.addFormProduit.value.name, this.image)
+
+      this.produitService.addProduit(produit).subscribe((res:any)=>{
         console.log(res);
+          this.alert = res.message
 
       })
 
@@ -50,4 +65,15 @@ export class AddProduitComponent implements OnInit {
 
   }
 
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+        this.image = (<FileReader>event.target).result;
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
 }

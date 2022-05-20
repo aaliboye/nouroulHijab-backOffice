@@ -9,7 +9,8 @@ import { ProduitService } from 'src/app/services/produit.service';
 export class ListProduitsComponent implements OnInit {
 
   categories: any
-  produits: any
+  produits: any =[]
+  defaultImage = "../../../assets/img/hijab.jpg"
 
   constructor(private produitService: ProduitService) { }
 
@@ -24,8 +25,20 @@ export class ListProduitsComponent implements OnInit {
   }
 
   produitByCattegory(idcategory : any){
-    this.produitService.listProductByCategory(idcategory).subscribe((res)=>{
-      this.produits = res
+    console.log(idcategory);
+    this.produits = []
+    this.produitService.listProductByCategory(idcategory).subscribe((res: any)=>{
+      res.forEach((prod: any) => {
+        if(localStorage.getItem(prod.name)){
+          prod.image = localStorage.getItem(prod.name)
+          console.log(prod.image);
+
+        }
+        else{
+          prod.image = this.defaultImage
+        }
+        this.produits.push(prod)
+      });
       console.log(this.produits);
 
     })

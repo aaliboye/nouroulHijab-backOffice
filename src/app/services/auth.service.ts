@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { API_URL } from './../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,9 @@ export class AuthService {
   userId!: any
   isAuth$  =  new BehaviorSubject<boolean>(false);
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient, private route: Router) {
     this.initAuth()
@@ -49,6 +52,12 @@ export class AuthService {
     })
 
   }
+
+
+
+  // login(telephone: String, password: String): Observable<any> {
+  //    return this.http.post<any>(`${API_URL}/users/login`, {telephone: telephone, password: password}, this.httpOptions)
+  // }
 
   signup(user: any){
     return new Promise((resolve, reject)=>{

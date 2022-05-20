@@ -1,7 +1,7 @@
 
         <div class="container">
           <div class="row">
-            <div class="col-3" *ngFor="let category of categories" >
+            <div class="col-3"  *ngFor="let category of categories" >
               <div class="card" style="width: 10rem;" (click)="produitByCattegory(category._id)">
                 <div class="card-body">
                   <h5 class="card-title">{{category.name}}</h5>
@@ -11,11 +11,11 @@
             </div>
           </div>
 
-          <div class="row" style="margin-top: 3rem;">
+          <div class="row">
             <div class="col-4" *ngFor="let produit of produits" style="margin-top: 3rem;" >
-              <div class="card" style="width: 18rem;" >
-                <img class="card-img-top" src="../../../assets/img/hijab.jpg" alt="Card image cap" >
-                <div class="card-body">
+              <div class="card"  >
+                <img class="card-img-top" src="{{produit.image}}" alt="Card image cap" >
+                <div class="card-body" [routerLink]="['/produit', produit._id]">
                   <h5 class="card-title">{{produit.name}}</h5>
                   <p class="card-text">{{produit.description}}</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>

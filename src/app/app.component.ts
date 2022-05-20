@@ -23,6 +23,7 @@ export class AppComponent {
   initializeApp() {
       this.authService.isAuth$.subscribe(state => {
         console.log(state)
+        this.isAuth = state
         if (state) {
           this.router.navigate(['/home']);
         } else {
