@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.getAllCategories()
     // this.getAllProducts()
     // this.produitByCattegory()
-    this.getListVentes()
+    this.getListVentesToday()
     this.vendreProduitForm = this.fb.group({
       productName: [''],
       quantite: [''],
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         categoryId: this.vendreProduitForm.value.categoryId,
         productName: this.vendreProduitForm.value.productName,
         quantite: this.vendreProduitForm.value.quantite,
-        type: this.vendreProduitForm.value.quantite
+        type: this.vendreProduitForm.value.type
       }
       this.produitService.sellProduct(ticket).subscribe((res:any)=>{
         console.log(res)
@@ -55,7 +55,9 @@ export class HomeComponent implements OnInit {
           this.success = res.message
           setTimeout(() => {
             this.success = ''
-          }, 1000);
+          }, 5000);
+
+          this.ionViewDidEnter()
 
         }
 
@@ -63,7 +65,7 @@ export class HomeComponent implements OnInit {
           this.error = res.message
           setTimeout(() => {
             this.error = ''
-          }, 1000);
+          }, 5000);
         }
 
 
@@ -81,7 +83,7 @@ export class HomeComponent implements OnInit {
     this.getAllCategories()
     // this.getAllProducts()
     this.produitByCattegory()
-    this.getListVentes()
+    this.getListVentesToday()
   }
 
 
@@ -109,8 +111,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  getListVentes(){
-    this.produitService.listeVentes().subscribe((res)=>{
+  getListVentesToday(){
+    this.produitService.listeVenteToday().subscribe((res)=>{
       this.tickets = res
     })
   }

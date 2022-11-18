@@ -18,7 +18,9 @@
                 <div class="card-body" [routerLink]="['/produit', produit._id]">
                   <h5 class="card-title">{{produit.name}}</h5>
                   <p class="card-text">{{produit.description}}</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <p class="card-text">Prix Unit: {{produit.prixUnit}} fcfa</p>
+                  <p class="card-text">Prix Gros: {{produit.prixGros}} fcfa</p>
+                  <p class="card-text">Stock: {{produit.stock}}</p>
                 </div>
               </div>
             </div>

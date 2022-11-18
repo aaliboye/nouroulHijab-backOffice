@@ -38,4 +38,13 @@ export class ProduitService {
     return this.http.get(`${API_URL}/tickets/list-ventes`, this.httpOptions)
   }
 
+  listeVenteToday(): Observable<any>{
+    return this.http.get(`${API_URL}/tickets/list-ventes-today`, this.httpOptions)
+  }
+
+  evaluation(productName: any): Observable<any>{
+    return this.http.put<any>(`${API_URL}/tickets/evaluation/`+productName, this.httpOptions)
+  }
+
+
 }

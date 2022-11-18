@@ -14,6 +14,11 @@ export class ListVentesComponent implements OnInit {
   categories: any
   produits: any
   ventes: any
+  allVentes: any
+  produit: any
+  qteVendus: number = 0
+  prixTotal: number = 0
+  isproduitSelected = false
   ventesName : any
   produitSelected: any
 
@@ -22,6 +27,7 @@ export class ListVentesComponent implements OnInit {
   ngOnInit(): void {
     // this.getListVentes()
     this.getAllCategories()
+    this.getListVentes()
     this.listVenteFormGroup = this.fb.group({
       categoryId: [''],
       productName: ['']
@@ -49,20 +55,46 @@ export class ListVentesComponent implements OnInit {
 
   getListVentes(){
     this.produitService.listeVentes().subscribe((res)=>{
-      this.ventes = res.reverse()
+      this.allVentes = res.reverse();
+      console.log(this.allVentes);
     })
   }
 
   getListVentesByName(){
+    this.qteVendus = 0;
+    this.prixTotal = 0;
     this.ventes = []
     this.produitService.listeVentes().subscribe((res: any)=>{
       console.log(res);
       console.log(this.produitSelected);
+      this.getOneProduit(this.produitSelected)
+      this.isproduitSelected = true
       res.forEach((vente: any) => {
-        if(vente.productName == this.produitSelected){
+        if(vente.productName == this.produitSelected && vente.visible == true){
           this.ventes.push(vente)
+          this.qteVendus += vente.quantite
+          this.prixTotal += vente.prixTotal
         }
       });
+
+    })
+  }
+
+  getOneProduit(name: any){
+    this.produitService.listproduit().subscribe((res:any)=>{
+      res.forEach((prod: any) => {
+        if(prod.name == name){
+          console.log(prod);
+
+          this.produit = prod
+        }
+      });
+    })
+  }
+
+  evaluer(){
+    this.produitService.evaluation(this.produitSelected).subscribe((res)=>{
+      console.log(res);
 
     })
   }
