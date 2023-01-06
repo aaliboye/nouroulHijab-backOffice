@@ -8,7 +8,8 @@ import { ProduitService } from 'src/app/services/produit.service';
 })
 export class ListProduitsComponent implements OnInit {
 
-  categories: any
+
+  : any
   produits: any =[]
   defaultImage = "../../../assets/img/hijab.jpg"
 

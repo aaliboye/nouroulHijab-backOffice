@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProduitComponent } from './home/add-produit/add-produit.component';
 import { ProduitComponent } from './home/produit/produit.component';
 import { ListVentesComponent } from './home/list-ventes/list-ventes.component';
+import { BookComponent } from './book/book/book.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ListVentesComponent } from './home/list-ventes/list-ventes.component';
     ListProduitsComponent,
     AddProduitComponent,
     ProduitComponent,
-    ListVentesComponent
+    ListVentesComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
